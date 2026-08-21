@@ -33,7 +33,8 @@ app.use(securityHeaders);
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
-  process.env.FRONTEND_URL, // Set this on Railway to your Vercel URL
+  'https://career-launch-blue.vercel.app',
+  process.env.FRONTEND_URL,
 ].filter(Boolean) as string[];
 
 app.use(cors({
@@ -79,6 +80,15 @@ app.use('/api/v1/tnp/audit-logs', auditRoutes);
 // Health Check
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'Internship Management System Backend', time: new Date() });
+});
+
+// Serve React frontend in production
+const frontendDist = path.resolve(process.cwd(), '../frontend/dist');
+app.use(express.static(frontendDist));
+
+// SPA fallback — send index.html for any non-API route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendDist, 'index.html'));
 });
 
 // Global Error Handler
