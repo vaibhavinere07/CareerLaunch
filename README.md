@@ -1,4 +1,5 @@
 🚀 CareerLaunch
+
 AI-Powered Internship Management System
 CareerLaunch is a comprehensive, role-based internship management platform designed to streamline the complete internship lifecycle for colleges, universities, and technical institutions.
 
